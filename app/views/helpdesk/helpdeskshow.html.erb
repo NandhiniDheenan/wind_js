@@ -1,0 +1,37 @@
+<html>
+<head>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body style="background: linear-gradient(to bottom, #ff9933 0%, #ffffff 100%);">
+
+<div class="profilehead">
+<form action="/customer"  >  
+
+<div class="profiletblhead">
+ <% @helpdesk_data.each do |val| %>
+<table style="width:80%" border="1" cellpadding="5%" cellspacing="1">
+  <tr>
+    <th colspan="2" align="center">ALERT HELP DESK DETAILS</th>
+    </tr>
+  <tr>
+    <td><label class="leftcusprofile"for="cusname">Primary Mobile No</label></td>
+    <td><label> <%= "#{val['primary_mobile_no']}" %></label></td>
+  </tr>
+   <tr>
+    <td><label class="leftcusprofile" for="cusAddr">Alternate Mobile No</label></td>
+    <td><label> <%= "#{val['alternate_mob_no']}" %></label></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusprofile"for="cuscity">Email</label></td>
+    <td><label> <%= "#{val['Email']}" %></label></td>
+  </tr>
+<% end %>
+</table>
+
+    
+  </div> 
+</form>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+// Place all the styles related to the report controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'jquery-ui/datepicker.css';
+@import 'jquery-ui/slider.css';
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+ //margin-left: 300px;
+
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.leftpane 
+{
+width: 58%;
+height: 100%;
+font-size: 14px;
+float: left;
+margin-left: 15%;
+padding-top: 2%;
+padding-left: 2%;
+padding-right: 2%;
+padding-bottom: 2%;
+border:1px solid black;
+}
+
+.reptoppane
+{
+width: 25%;
+height: 350%;
+font-size: 10px;
+float: right;
+border:1px solid black;
+padding-left: 2%;
+margin-bottom:1%;
+padding-left: 1%;
+padding-top: 0.5%;
+padding-bottom: 0.5%;
+}
+
+.middlepane
+{
+width: 25%;
+height: 400%;
+float: right;
+border:1px solid black;
+//padding-left: 2%;
+padding-bottom: 2%;
+//background: linear-gradient(rgba(0,190,192,0.4), rgba(180,170,170,0.8));
+}
+
+.sliderpane1
+{
+width: 88%;
+height: 40%;
+//padding-left: 5%;
+//font-size: 12px;
+//float: left;
+margin-left: 10%;
+//padding-top: 2%;
+}
+
+
+.pcpane 
+{
+width: 25%;
+height: 400%;
+float: right;
+border:1px solid black;
+margin-top:1%;
+//padding-left: 2%;
+padding-bottom: 2%;
+}
+
+
+.toppane{
+
+float:right;
+//padding-left:400px;
+margin-right: 5%;
+}
+
+
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+.dropbtn {
+    //background-color:  #f4511e;
+    color: black;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width:100%;
+
+border-radius: 12px;
+
+}
+
+.dropdown 
+{
+ position: relative;
+ display: inline-block;
+ padding-top: 8px;
+ padding-left: 50px;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: center;
+    background-color: #f1f1f1;
+    min-width: 10px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 2px 16px;
+    text-decoration: none;
+    display: block;
+
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+
+}
+
+.dropbtn:hover, .dropbtn:focus {
+   opacity: 1
+}
+
+.bc
+{
+
+
+height:50px;
+border-radius: 5px;
+}
+
+.heading
+{
+ padding-top: 1%;
+ padding-left: 0%;
+font-size: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

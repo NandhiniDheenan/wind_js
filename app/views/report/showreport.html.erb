@@ -1,0 +1,457 @@
+<html>
+<body style="background: linear-gradient(to bottom, #ff9933 0%, #ffffff 100%);">
+
+ <%= stylesheet_link_tag 'application' %>
+ <%= javascript_include_tag  "application" %>
+
+<script>
+
+$(function(){
+      $("#fromdate").datepicker({
+       dateFormat: 'yy/mm/dd',  
+       onSelect: function(dateText) {
+       
+      }
+   });
+});
+ 
+$(function(){
+      $("#todate").datepicker({
+         dateFormat: 'yy/mm/dd',
+         onSelect: function(dateText) {
+         $("#dateform").submit(); 
+       }
+   });
+});
+
+</script>
+
+<div class="container">
+<div class="row">
+<div class="leftpane"> 
+<table id="table_id" 
+
+class="table table-condensed table-striped table-hover"  border="1"  style="font-size: 8px; ">
+    <thead style="font-size: 9px;color:black">
+        <tr>
+<th>controllerID</th>
+<th>Updated Date</th>
+<th>Updated Time</th>
+<th>Uid</th>
+<th>Generator RPM</th>
+<th>Dc Bus Voltage</th>
+<th>Voltage RPhase</th>
+<th>Voltage YPhase</th>
+<th>Voltage BPhase</th>
+<th>VFD Frequency</th>
+<th>VFD Current</th>
+<th>Current RPhase</th>
+<th>Current YPhase</th>
+<th>Current BPhase</th>
+<th>Wind Speed </th>
+<th>Turbine RPM </th>
+<th>Current Kilowatt </th>
+<th>Power Factor </th>
+<th>Cur Frequency </th>
+<th>kwh Import </th>
+<th>kwh Export </th>
+<th>kvah Import </th>
+<th>kvah Export	</th>
+<th>kvarh Import</th>
+<th>kvarh Export</th>
+<th>status</th>
+<th>fault</th>
+<th>RD WR index</th>
+</tr>
+</thead>
+
+
+<% @periodic_data_tbl.each do |val| %>
+
+<tr>
+<td><%= "#{val['ctrlrid']}" %></td>
+<td ><%= "#{val['updated_date']}" %></td>
+<td><%= "#{val['updated_time'].strftime("%H:%M:%S")}" %></td>
+<td> <%= "#{val['uid']}" %></td>
+<td><%= "#{val['wtvalue1']}" %></td>
+<td><%= "#{val['wtvalue2']}" %></td>
+<td><%= "#{val['wtvalue3']}" %></td>
+<td><%= "#{val['wtvalue4']}" %></td>
+<td><%= "#{val['wtvalue5']}" %></td>
+<td><%= "#{val['wtvalue6']}" %></td>
+<td><%= "#{val['wtvalue7']}" %></td>
+<td><%= "#{val['wtvalue8']}" %></td>
+<td><%= "#{val['wtvalue9']}" %></td>
+<td><%= "#{val['wtvalue10']}" %></td>
+<td><%= "#{val['wtvalue11']}" %></td>
+<td><%= "#{val['wtvalue12']}" %></td>
+<td><%= "#{val['wtvalue13']}" %></td>
+<td><%= "#{val['wtvalue14']}" %></td>
+<td><%= "#{val['wtvalue15']}" %></td>
+<td><%= "#{val['wtvalue16']}" %></td>
+<td><%= "#{val['wtvalue17']}" %></td>
+<td><%= "#{val['wtvalue18']}" %></td>
+<td><%= "#{val['wtvalue19']}" %></td>
+<td><%= "#{val['wtvalue20']}" %></td>
+<td><%= "#{val['wtvalue21']}" %></td>
+<td><%= "#{val['status1']}" %></td>
+<td><%= "#{val['fault']}" %></td>
+<td><%= "#{val['RD_WR_index']}" %></td>
+</tr>
+<% end %>
+</table>
+</div>
+
+
+<div class="reptoppane">
+<%= form_tag( '/searchrep', :method => :get, :id => 'dateform' ) do%>
+<b>ID </b><input type="text" id="controllerid" name="controllerid" style="width:80px;" value="<%= @controllerid %>" readonly =" true" >
+<b>From </b><input  type="text" id="fromdate" name="fromdate" style="width:70px;"> 
+<b> To </b> <input type="text" id="todate" name="todate" style="width:70px;" >
+<%end%>
+</div>
+
+
+<div class="middlepane">
+<div class="heading">
+<b style="margin-left:1%">Graph</b>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;margin-left:25%;" id="myButton1d">1D</a></button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="myButton1w">1W</button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="myButton1m">1M</button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="myButton6m">6M</button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="myButton1y">1Y</button>
+</div>
+<div id="canvas-holder">
+<canvas id="myChart3"  width="180" height="100" ></canvas>
+</div>	
+<div class="sliderpane1">
+<div id="slider" ></div>
+</div>
+</div>
+
+<script>
+var curentpage=1;
+var myChart3 ;
+$(function(){
+      
+     
+      drawgraph();
+      initializegraphdata();
+      window.myChart3.update();
+     
+});
+
+function initializegraphdata(){
+      myChart3.config.data.datasets[0].data=wtvalue1.slice(curentpage,curentpage+100);
+      myChart3.config.data.labels=datearr.slice(curentpage,curentpage+100);
+      window.myChart3.update();
+}
+
+var wtvalue1=<%= raw(@wtvalue1) %>;
+var timearr=<%= raw(@timearray) %>;
+var datearr=<%= raw(@datearray) %>;
+var wtvalue11=<%= raw(@wtvalue11) %>;
+var wtvalue12=<%= raw(@wtvalue12) %>;
+
+
+function drawgraph(){
+       ctx = document.getElementById("myChart3").getContext('2d');
+       myChart3 = new Chart(ctx, {
+          type: 'line',
+          zoomType: 'x',
+
+          data: {
+                  labels: [], 
+                   datasets: [{
+                   label: 'Generator_RPM',
+                   yAxisID: 'A',
+                   fill: true,
+                   backgroundColor: "rgba(0,192,192,0.4)",
+                   borderColor: "rgba(0,192,192,5)",
+                   data: [],
+                },
+                
+               ]
+          },
+      
+          options: {
+
+ 		   tooltips: {
+         		   mode : 'label'
+    			   },
+
+                   legend: {
+                            display: true,
+                            position: 'top',
+
+                   labels: {
+                            fontColor: "#000080",
+                           }
+                           },
+
+          scales: {
+
+                   xAxis: [{
+                            type: 'time',
+
+                    time: {
+
+                            unit: 'day',
+	
+                           }                 
+                          }],
+      
+                  yAxes: [{
+                            id: 'A',
+                            type: 'linear',
+                            position: 'left',
+
+                  ticks: {
+                            beginAtZero: true
+                         }
+                       }]
+              }
+          }
+     });
+}
+
+</script>
+
+<script type="text/javascript">
+    document.getElementById("myButton1d").onclick = function () {
+       window.location = "/oneday?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("myButton1w").onclick = function () {
+       window.location = "/oneweek?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("myButton1m").onclick = function () {
+       window.location = "/onemonth?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("myButton6m").onclick = function () {
+       window.location = "/sixmonths?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("myButton1y").onclick = function () {
+       window.location = "/oneyear?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+
+
+<script>
+    $( function(myChart) {
+          var totalrecord =datearr.length;
+          //console.log(totalrecord);
+          var recordtobeploted=1;
+          var step=100/((totalrecord-recordtobeploted)/recordtobeploted);
+          $( "#slider" ).slider({
+             slide: function(event, ui) {
+             startvalue=(Math.round(ui.value/step)*recordtobeploted);
+             endvalue=startvalue+100;
+             updateslide();
+      }
+      
+    });
+});
+
+function updateslide()
+{
+ myChart3.config.data.datasets[0].data=wtvalue1.slice(startvalue,endvalue);
+ myChart3.config.data.labels=datearr.slice(startvalue,endvalue);
+ window.myChart3.update();
+}
+</script>
+
+<script>
+$(document).ready(function(){
+$("#myChart3").click(function(){
+    window.location = "/chart?ctrlr_id=<%= @controllerid %>";
+});
+});
+</script>
+
+<script type="text/javascript">
+  
+        $('#table_id').DataTable(
+
+{
+	"sScrollY": ($(window).height() - 350),
+        "scrollX": true,
+	"scrollY": true,
+ 
+}
+
+);  
+</script>
+
+
+<!--power curve -->
+<div class="pcpane">
+<b style="margin-left:1%">Power Curve</b>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;margin-left:8%;" id="pcButton1d"> 1D</a></button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="pcButton1w">1W</button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="pcButton1m">1M</button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="pcButton6m">6M</button>
+<button style="width:20px;height:20px;font-size:9px;text-align: center;font-weight: bold;padding-left:0.5px;padding-right:5%;padding-bottom:4%;" id="pcButton1y">1Y</button>
+<div id="canvas-holder">
+<canvas id="myChart1"  ></canvas>
+</div>
+
+
+<script>
+var ctx ;
+var myChart1 ;
+
+$(function()
+{   
+      drawgraph1();
+      initializegraphdata1();      
+});
+
+function initializegraphdata1()
+{   
+  myChart1.config.data.labels=pc_wtvalue11.slice(curentpage,curentpage+100);
+  myChart1.config.data.datasets[0].data=pc_wtvalue13.slice(curentpage,curentpage+100);
+  window.myChart1.update();
+}
+
+function updategraph1()
+{           
+  myChart1.config.data.labels=pc_wtvalue11.slice(curentpage,curentpage+100);
+  myChart1.config.data.datasets[0].data=pc_wtvalue13.slice(curentpage,curentpage+100);
+  window.myChart1.update();
+}
+
+var pc_wtvalue11=<%= raw(@pc_wtvalue11) %>;
+var pc_timearr=<%= raw(@pc_timearray) %>;
+var pc_datearr=<%= raw(@pc_datearray) %>;
+var pc_wtvalue13=<%= raw(@pc_wtvalue13) %>;
+
+function drawgraph1()
+{
+       ctx = document.getElementById("myChart1").getContext('2d');
+       myChart1 = new Chart(ctx, {
+          type: 'line',
+          zoomType: 'x',
+          data: {
+
+                  labels: [], 
+                   datasets: [
+                {
+                   label: 'KW',
+                   yAxisID: 'B',
+                   fill: true,
+                   lineTension: 0.3,
+                   backgroundColor: "rgba(220,0,90,0.4)",
+                   borderColor: "rgba(220,0,90,5)",
+                   data: [],    
+                }            
+               ]
+          },
+      
+          options: {
+ 		   tooltips: {
+         		   mode : 'label'
+    			   },
+                   legend: {
+                            display: true,
+                            position: 'top',
+                   labels: {
+                            fontColor: "#000080",
+                           }
+                          },
+          scales: {
+                  
+      
+                  yAxes: [{
+                            id: 'B',
+                            type: 'linear',
+                            position: 'left',
+                  ticks: {
+                            beginAtZero: true
+                         }
+                       }]
+              }
+          }
+     });
+}
+</script>
+
+<script>
+$( function(myChart1)
+{
+          var totalrecord =pc_wtvalue11.length;
+          var recordtobeploted=1;
+          var step=100/((totalrecord-recordtobeploted)/recordtobeploted);
+          $( "#slider1" ).slider({
+             slide: function(event, ui) {
+             startvalue=(Math.round(ui.value/step)*recordtobeploted);
+             endvalue=startvalue+100;
+             updateslide1();
+      }
+      
+    });
+});
+
+function updateslide1()
+{
+   myChart1.config.data.labels=pc_wtvalue11.slice(startvalue,endvalue);
+   myChart1.config.data.datasets[0].data=pc_wtvalue13.slice(startvalue,endvalue);
+   window.myChart1.update();
+}
+</script>
+
+<div class="sliderpane1">
+<div id="slider1"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+$("#myChart1").click(function(){
+    window.location = "/powercurve?ctrlr_id=<%= @controllerid %>";
+});
+});
+</script>
+
+<script type="text/javascript">
+    document.getElementById("pcButton1d").onclick = function () {
+       window.location = "/pc_oneday?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("pcButton1w").onclick = function () {
+       window.location = "/pc_oneweek?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("pcButton1m").onclick = function () {
+       window.location = "/pc_onemonth?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+<script type="text/javascript">
+    document.getElementById("pcButton6m").onclick = function () {
+       window.location = "/pc_sixmonths?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+<script type="text/javascript">
+    document.getElementById("pcButton1y").onclick = function () {
+       window.location = "/pc_oneyear?ctrlr_id=<%= @controllerid %>";
+    };
+</script>
+
+</body>
+</html>

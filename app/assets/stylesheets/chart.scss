@@ -1,0 +1,37 @@
+// Place all the styles related to the chart controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'jquery-ui/slider.css';
+
+.topchartpane
+{
+width: 75%;
+height: 55%;
+font-size: 12px;
+float: left;
+margin-left: 20%;
+padding-top: 2%;
+}
+.toppane2
+{
+padding-top: 5px;
+float: right;
+//padding-left:400px;
+margin-right: 6%;
+font-size :65%;
+}
+.sliderpane
+{
+width: 70%;
+height: 55%;
+//font-size: 12px;
+float: left;
+margin-left: 20%;
+//padding-top: 2%;
+}
+.charthead
+{
+padding-top: 1%;
+//float: left;
+margin-left:20%
+}

@@ -1,0 +1,82 @@
+<html>
+<head>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body style="background: linear-gradient(to bottom, #ff9933 0%, #ffffff 100%);">
+
+<div class="profilehead">
+<form action="/customer"  >  
+
+<div class="profiletblhead">
+ <% @profile_data.each do |val| %>
+<table style="width:70%" border="1" cellpadding="5%" cellspacing="1">
+  <tr>
+    <th colspan="2" align="center">USER PROFILE DETAILS</th>
+    </tr>
+  <tr>
+    <td><label class="leftcusprofile" for="cusname"> Name </label></td>
+    <td><label>  <%= "#{val['user_name']}" %> > </label></td>
+  </tr>
+   <tr>
+    <td><label class="leftcusprofile" for="cusAddr"> Address </label></td>
+    <td><label> <%= "#{val['user_addrs']}" %> </label></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusprofile" for="cuscity"> City</label></td>
+    <td><label> <%= "#{val['city']}" %> </label></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusprofile" for="cusstate"> State</label></td>
+    <td><label> <%= "#{val['state']}" %> </label></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusprofile" for="cuscoutry"> Country</label></td>
+    <td><label> <%= "#{val['country']}" %> </label></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusprofile" for="cuszip"> Pin Code</label></td>
+    <td><label> <%= "#{val['pincode']}" %> </label></td>
+  </tr>
+</tr>
+ <tr>
+    <td><label class="leftcusprofile" for="cuscontact"> Contact Number</label></td>
+    <td><label> <%= "#{val['contact_number']}" %> </label></td>
+  </tr>
+</tr>
+
+<tr>
+    <td><label class="leftcusprofile" for="cuscontact"> Mobile Number </label></td>
+    <td><label> <%= "#{val['mobile_number']}" %> </label></td>
+  </tr>
+
+<tr>
+    <td> <label class="leftcusprofile" for="email"> Email </label></td>
+    <td><label> <%= "#{val['Email']}" %> </label></td>
+  </tr>
+</tr>
+    
+<tr>
+<!--<td colspan="4" align="center"><button type="button" class="pro_edit_btn" id="editbtn" style="width:10%" >Edit</button>
+<button type="button" class="pro_save_btn" id="prosavebtn" disabled = "true" >save</button>
+<button type="button" class="pro_cancel_btn" id="procancelbtn" disabled = "true" >cancel</button></td>-->
+ </tr>
+ <tr>
+<% end %>
+</table>
+
+    
+</div> 
+</form>
+<script>
+$(function() {
+    $('pro_value').hide();
+   // $('#sel').change(function() {
+     //   var val = $(this).val();
+       // $('label').hide();
+        //$('#label'+val).show():
+   // });
+});
+</script>
+</body>
+</html>

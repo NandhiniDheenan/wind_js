@@ -1,0 +1,68 @@
+<html>
+<head>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body style="background: linear-gradient(to bottom, #ff9933 0%, #ffffff 100%);">
+
+<div class="customerhead1">
+
+<form action="/customerpost" id="customerform" >  
+
+<div class="tblhead">
+<table style="width:60%" border="1" cellpadding="5%" cellspacing="1">
+  <tr>
+    <th colspan="2" align="center">ADD CUSTOMER DETAILS</th>
+    </tr>
+  <tr>
+    <td><label class="left"for="cusname">Customer Name</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Customer Name" name="cusname" required></td>
+  </tr>
+
+   <tr>
+    <td><label class="left" for="cusAddr">Customer Address</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Customer Address" name="cusAddr" required></td>
+  </tr>
+ <tr>
+    <td><label class="left"for="cuscity">Customer City</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Customer City" name="cuscity" required></td>
+  </tr>
+ <tr>
+    <td><label class="left"for="cusstate">Customer State</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Customer State" name="cusstate" required></td>
+  </tr>
+ <tr>
+    <td><label class="left"for="cuscoutry">Customer Country</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Customer Country" name="cuscountry" required></td>
+  </tr>
+ <tr>
+    <td><label class="left"for="cuszip">Customer Zip Code</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Customer Zip Code" name="cuszip" required></td>
+  </tr>
+</tr>
+ <tr>
+    <td><label class="left"for="cuscontact">Customer Contact No</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Customer Contact No" name="cuscontact" required></td>
+  </tr>
+</tr>
+ <tr>
+    <td> <label class="left"for="email">Customer Email</label></td>
+    <td><input  class="right" type="text" placeholder="Enter Email" name="email" required></td>
+  </tr>
+</tr>
+    
+<tr>
+<td colspan="2" align="center"><button type="submit" class="signupbtn">Submit</button>
+<button type="button" class="resetbtn">Reset</button></td>
+    </tr>
+ <tr>
+</table>
+
+    
+  </div> 
+</form>
+<script>
+$('.resetbtn').click(function() { $('#customerform')[0].reset() })
+</script>
+</body>
+</html>

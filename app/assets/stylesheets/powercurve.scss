@@ -1,0 +1,27 @@
+// Place all the styles related to the powercurve controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.pc_toppane
+{
+padding-top: 5px;
+float: right;
+//padding-left:400px;
+margin-right: 6%;
+font-size :65%;
+}
+.pc_charthead
+{
+padding-top: 1%;
+//float: left;
+margin-left:20%
+}
+.pc_topchartpane
+{
+width: 75%;
+height: 55%;
+font-size: 12px;
+float: left;
+margin-left: 20%;
+padding-top: 2%;
+}

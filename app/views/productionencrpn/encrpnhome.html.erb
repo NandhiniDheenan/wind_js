@@ -1,0 +1,29 @@
+<html>
+<div class="prdctnhead">
+<%= form_tag( '/authendicate', :method => :get, :id => 'submit') do%>
+<table style="width:100%" border="1" cellpadding="20" cellspacing="2">
+  <tr >
+    <th  colspan="4">GENERATE AUTHORIZATION CODE</th>
+    </tr>
+  <tr>
+<td><label class="prdnleft">Controller Name</label></td>
+    <td><input class ="prdnright" type="text" name="ctrlrname" id="ctrlrname" required></td>
+    <td><label class="prdnleft">Controller ID</label></td>
+    <td><input class ="prdnright" type="text" name="ctrlrid" id="ctrlrid" required></td>
+  </tr>
+<tr>
+
+<td colspan="4" align="center"><button type="submit" class="signupbtn" id="submit">Submit</button>
+
+<button type="button" class="resetbtn">Reset</button></td>
+</tr>
+<tr>
+    <th colspan="4">COMMUNICATION AUTHORIZATION CODE </th>
+    </tr>
+    <tr>
+    <td colspan="4" align="center"><input type="text"  name="code1" style="width:500px" value=<%= @get_value %> > </td>
+    </tr>
+
+</table>
+<% end %>
+</html>

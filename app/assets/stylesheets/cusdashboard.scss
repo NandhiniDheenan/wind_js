@@ -1,0 +1,25 @@
+// Place all the styles related to the cusdashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import "jquery.dataTables.min.css";
+@import "buttons.dataTables.min.css";
+@import 'jquery-ui/datepicker.css';
+
+
+.cusdbdatapane
+{
+
+
+font-size: 11px;
+float: left;
+margin-left: 15%;
+padding-top: 2%;
+
+}
+.cusdbheading1
+{
+margin-left: 15%;
+font-weight: bold;
+}

@@ -1,0 +1,138 @@
+<html>
+<body style="background: linear-gradient(to bottom, #ff9933 0%, #ffffff 100%);">
+<%= stylesheet_link_tag 'application' %>
+<%= javascript_include_tag  "application" %>
+<%= form_tag( '/dataview', :method => :get,:id => 'dateform' ) do%>
+<br>
+
+
+<div class="cusdbheading1">
+DashBoard
+</div>
+<%end%>
+
+<script>
+ $(function(){
+      $("#fromdate").datepicker({
+         dateFormat: 'yy/mm/dd',
+        
+       onSelect: function(dateText) {
+       
+      }
+   });
+});
+ 
+ $(function(){
+      $("#todate").datepicker({
+         dateFormat: 'yy/mm/dd',
+         onSelect: function(dateText) {
+         
+       }
+   });
+});
+
+$(function(){
+     
+        $('#search').click(function(){
+         $("#dateform").submit();  
+      });
+        
+    }
+);
+
+</script>
+<div class="cusdbdatapane">
+<table id="table_id" class="display nowrap" border="1" >
+<thead>
+<tr>
+<th>controllerID </th>
+<th>Updated Date </th>
+<th>Updated Time </th>
+<th>Wind Speed </th>
+<th>Turbine RPM </th>
+<th>kwh Import </th>
+<th>kwh Export </th>
+<th>status</th>
+<th>fault</th>
+<th>Report</th>
+</tr>
+</thead>
+<% @periodic_data_tbl.each do |val| %>
+<tr>
+<td><%= "#{val['ctrlrid']}" %></td>
+<td ><%= "#{val['updated_date']}" %></td>
+<td><%= "#{val['updated_time'].strftime("%H:%M:%S")}" %></td>
+<td><%= "#{val['wtvalue11']}" %></td>
+<td><%= "#{val['wtvalue12']}" %></td>
+<td><%= "#{val['wtvalue16']}" %></td>
+<td><%= "#{val['wtvalue17']}" %></td>
+<td><%= "#{val['status1']}" %></td>
+<td><%= "#{val['fault']}" %></td>
+<td><a href="/reports?ctrlr_id=<%= "#{val['ctrlrid']}" %>" class="w3-bar-item w3-button w3-padding"><i class="fa fa-table tblcheck"></i>  </a></td>
+</tr>
+<% end %>
+</table>
+</div>
+
+<script type="text/javascript">
+  
+        $('#table_id').DataTable(
+	{
+        "scrollX": true,
+	"scrollY": true,
+	dom: 'Bfrtip',
+        buttons: [
+		{
+                extend: 'copyHtml5',
+               	messageTop: 'From Date: '+$('#fromdate').val()+"\n"+' To Date: '+$('#todate').val()+"\n",
+                title: 'APEX COMTEL - Wind Monitoring System',
+		filename: $('#fromdate').val()+"-"+$('#todate').val()+"APEX COMTEL - Wind System"
+                },
+		{
+                extend: 'csvHtml5',
+                messageTop: 'From Date: '+$('#fromdate').val()+"\n"+' To Date: '+$('#todate').val()+"\n",
+                title: 'APEX COMTEL - Wind Monitoring System',
+		filename: $('#fromdate').val()+"-"+$('#todate').val()+"APEX COMTEL - Wind System"
+                },
+                {
+                extend: 'excelHtml5',
+                messageTop: 'From Date: '+$('#fromdate').val()+"  "+' To Date: '+$('#todate').val()+"\n",
+                title: 'APEX COMTEL - Wind Monitoring System',
+		filename: $('#fromdate').val()+"-"+$('#todate').val()+"APEX COMTEL - Wind System"			
+                },
+                {
+                 extend: 'pdfHtml5',
+		 messageTop: 'From Date: '+$('#fromdate').val()+"\n"+' To Date: '+$('#todate').val()+"\n",
+                 title: 'APEX COMTEL - Wind Monitoring System',
+		 filename: $('#fromdate').val()+"-"+$('#todate').val()+"APEX COMTEL - Wind System",
+		 customize: function(doc) {
+    			doc.styles.title = {
+      			color: 'blue',
+      			fontSize: '14',
+     			alignment: 'center'
+    		}   
+  	      }                 
+            },
+	    {
+                extend: 'print',
+		orientation: 'landscape',
+		//fontSize: '20',
+		messageTop: 'From Date: '+$('#fromdate').val()+"\n"+' To Date: '+$('#todate').val()+"\n",
+                title: 'APEX COMTEL - Wind Monitoring System',
+		filename: $('#fromdate').val()+"-"+$('#todate').val()+"APEX COMTEL - Wind System",		 
+	    }
+        ]
+}    
+);
+</script>
+<script>
+$(document).ready(function() {
+    var table = $('#tblcheck').DataTable();
+    $('#tblcheck tbody').on('click', 'tr', function () {
+    var data = table.row( this ).data();
+    alert( 'You clicked on '+data[0]+'\'s row' );
+    } );
+} );
+</script>
+</body>
+</html>

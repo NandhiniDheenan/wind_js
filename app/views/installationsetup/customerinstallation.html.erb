@@ -1,0 +1,101 @@
+<html>
+<script>
+ $(function(){
+      $("#date").datepicker({
+         dateFormat: 'yy/mm/dd',
+        
+       onSelect: function(dateText) {
+       
+      }
+   });
+});
+</script>
+
+<body style="background: linear-gradient(to bottom, #ff9933 0%, #ffffff 100%);">
+<form  action="/customerinstallationpost" id="cus_ins_setup">  
+<div class="tblhead">
+<table style="width:100%" border="1" cellpadding="2" cellspacing="2">
+  <tr>
+    <th colspan="4">ADD INSTALLATION SETUP </th>
+    </tr>
+  <tr>
+    <td><label class="leftcusins">Controller ID</label></td>
+    <td><input class="rightcusins" type="text" name="ctrlrid" id="ctrlrid" required></td>
+    <td><label class="leftcusins">Sim Card No</label></td>
+    <td><input class="rightcusins" type="text"  name="simno" id="simno" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Product Model Name</label></td>
+    <td><input class="rightcusins" type="text"  name="prodictmdl" id="prodictmdl" required></td>
+    <td><label class="leftcusins">Mobile No</label></td>
+    <td><input class="rightcusins" type="text"  name="mobno" id="mobno" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Product Unit Serial No</label></td>
+    <td><input class="rightcusins" type="text"  name="productunit" id="productunit" required></td>
+    <td><label class="leftcusins">Date Of Commissioning</label></td>
+    <td><input class="rightcusins"  type="text" id="date" name="date" id="date" required ></td>
+  </tr>
+  <tr>
+    <td><label class="leftcusins">Panel No</label></td>
+    <td><input class="rightcusins" type="text" name="panelno" id="panelno" required></td>
+    <td><label class="leftcusins">Installed Location</label></td>
+    <td><input class="rightcusins" type="text"  name="installedlocation" id="installedlocation" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Alternator Make</label></td>
+    <td><input class="rightcusins" type="text"  name="alternatormake" id="alternatormake" required></td>
+    <td><label class="leftcusins">Installed Address </label></td>
+    <td><input class="rightcusins" type="text"  name="installedaddr" id="installedaddr" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Alternator No</label></td>
+    <td><input class="rightcusins" type="text" name="alternatorno" id="alternatorno" required></td>
+    <td><label class="leftcusins">Customer Name</label></td>
+    <td><input class="rightcusins" type="text"  name="cusname" id="cusname" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Engine No </label></td>
+    <td><input class="rightcusins" type="text"  name="Engineno" id="Engineno" required></td>
+    <td><label class="leftcusins">Technician Name </label></td>
+    <td><input class="rightcusins" type="text"  name="techname"  id="techname" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Site Manager Name</label></td>
+    <td><input class="rightcusins" type="text" name="managername" id="managername" required></td>
+    <td><label class="leftcusins">Controller Type</label></td>
+    <td><input class="rightcusins" type="text"  name="ctrlrtype" id="ctrlrtype" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Site Type </label></td>
+    <td><input class="rightcusins" type="text"  name="sitetype" id="sitetype" required></td>
+    <td><label class="leftcusins">Latitude </label></td>
+    <td><input class="rightcusins" type="text"  name="latitude" id="latitude" required></td>
+  </tr>
+ <tr>
+    <td><label class="leftcusins">Longitude </label></td>
+    <td><input class="rightcusins" type="text"  name="Longitude" id="Longitude" required></td>
+    <td><label class="leftcusins">Customer Mail ID </label></td>
+    <td><input class="rightcusins" type="text"  name="cus_mailid" id="cus_mailid" required></td>
+  </tr>
+    <tr>
+    <th colspan="4">COMMUNICATION AUTHORIZATION CODE </th>
+    </tr>
+</tr>
+    <tr>
+   <!-- <td colspan="4" align="center"><input type="text"  name="code1" id="code1" style="width:150px"> - <input id="code2" type="text"  style="width:150px"> - <input id="code3" type="text"  name="code1" style="width:150px"> - <input type="text"  name="code1" id="code4" style="width:150px"></td>-->
+<td colspan="4" align="center"><input type="text"  name="code1" id="code1" style="width:250px"> </td>
+    </tr>
+<tr>
+<td colspan="4" align="center"><button type="submit" class="signupbtn" id="submit">Submit</button>
+<button type="button" class="ins_setup_resetbtn" id="resetbtn">Reset</button></td>
+</tr>
+<tr>
+</table>
+</div>
+</form>
+<script>
+$('.ins_setup_resetbtn').click(function() { $('#cus_ins_setup')[0].reset() })
+</script>
+</body>
+</html>

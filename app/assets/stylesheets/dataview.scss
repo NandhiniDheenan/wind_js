@@ -1,0 +1,32 @@
+// Place all the styles related to the dataview controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "jquery.dataTables.min.css";
+@import "buttons.dataTables.min.css";
+@import 'jquery-ui/datepicker.css';
+@import 'jquery-ui/slider.css';
+.body {
+    background-color: lightblue;
+}
+.datapane
+{
+width: 65%;
+height: 35%;
+font-size: 12px;
+float: left;
+margin-left: 15%;
+padding-top: 2%;
+}
+.toppane1
+{
+//padding-top: 2%;
+float: right;
+//padding-left:400px;
+margin-right: 6%;
+font-size :65%;
+}
+.heading1
+{
+//float: left;
+margin-left:15%
+}
